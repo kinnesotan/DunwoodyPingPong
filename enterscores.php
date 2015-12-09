@@ -1,10 +1,11 @@
 <?php
 session_start();
 include_once 'dbconnect.php';
+include 'elo.php';
 
 if(!isset($_SESSION['user']))
 {
-	//header("Location: index.php");
+	header("Location: index.php");
 	?>
 	<style type="text/css">#loginfields{
 	display:none;
@@ -27,6 +28,7 @@ if(isset($_POST['btn-login']))
 	$res=mysql_query("SELECT * FROM users WHERE email='$email'");
 	$row=mysql_fetch_array($res);
 	
+	
 	if($row['password']==md5($upass))
 	{
 		$_SESSION['user'] = $row['user_id'];
@@ -35,8 +37,29 @@ if(isset($_POST['btn-login']))
 	else
 	{
 		?>
-        <script>alert('wrong details');</script>
-        <?php
+		<script>alert('wrong details');</script>
+		<?php
+	}
+}
+if(isset($_POST['btn-post']))
+{
+	
+	$userscore = mysql_real_escape_string($_POST['userscore']);
+	$oppscore = md5(mysql_real_escape_string($_POST['oppscore']));
+	
+	
+	echo $_GET["oppscore"];
+	if(mysql_query("INSERT INTO games(winloss,userscore,oppscore) VALUES('$userscore','$oppscore')"))
+	{
+		?>
+		<script>alert('Your scores were successfully entered');</script>
+		<?php
+	}
+	else
+	{
+		?>
+		<script>alert('There was an error while entering your score...');</script>
+		<?php
 	}
 }
 ?>
@@ -47,6 +70,12 @@ if(isset($_POST['btn-login']))
         <title>Enter your scores | Dunwoody Ping Pong</title>
         <link rel="stylesheet" href="main.css" type="text/css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
+	<style type="text/css">
+		#main
+		{
+			height: 336px;
+		}
+	</style>
     </head>
 <body>
         <div id="wrapper">
@@ -86,27 +115,54 @@ if(isset($_POST['btn-login']))
             
             <!-- Main content starts here -->
             <div id="main">
-			    <br>
-			        <div id="headline">
-				    <h3>Enter your ping pong scores here</h3>
-			        </div>
-			        <p class="mainpara">
-			        This is the official site to keep track of ping pong scores and rankings at
-			        Dunwoody College of Technology. You can check the official player rankings
-			        of every registered ping pong player at Dunwooody. Enter your scores to try
-			        claim the number one ranking.
-			        </p>
-			        <p class="mainpara">
-			        Overall ranking is dependent on wins and losses as well as quality of competition.
-			        If you defeat a player ranked higher than you, you will move up. If you lose to
-			        someone ranked higher than you, you will not lose rank. Your ranking will move up
-			        more when defeating higher quality competition and only slightly when defeating
-			        lower quality competition.
-			        </p>
-            </div>
-            
-            <!-- Main content ends here -->
-        
+		<br>
+		    <div id="headline">
+			<h3>Enter your ping pong scores here</h3>
+		    </div>
+		    <div id="login-form">
+			    <form method="post">
+				<table align="center" width="30%" border="0">
+				<tr>
+				<td>
+				    Choose your opponent:
+				     <select>
+					    <?php
+						    include 'dbconnect.php';
+						    $id = mysql_real_escape_string($_SESSION['user']);
+						    //$search = mysql_query("SELECT user_id, username FROM games WHERE user_id!=" + $id);
+						    //$search = mysql_query("SELECT user_id FROM users");
+						    $search = mysql_query("SELECT username FROM users");
+						    $result = mysql_fetch_assoc($search);
+						    $totalRows = mysql_num_rows($search);
+						    
+						    
+						    echo $result['user_id'];
+						    do {  
+							    ?>
+							    <option value="<?php echo $result['username'] ?>"<?php if (!(strcmp($result['username'], $result['username']))) {echo "selected=\"selected\"";} ?>><?php echo $result['username']?></option>
+							    <?php
+						    } while ($result = mysql_fetch_assoc($search));
+						      $rows = mysql_num_rows($search);
+						      if($rows > 0) {
+							  mysql_data_seek($search, 0);
+							  $result = mysql_fetch_assoc($search);
+						      }
+					    ?>
+				     </select>	 
+				</td>
+				</tr>
+				<tr>
+				<td><input type="text" name="userscore" placeholder="Enter your score" required /></td>
+				</tr>
+				<tr>
+				<td><input type="text" name="oppscore" placeholder="Enter opponent's score" required /></td>
+				</tr>
+				<tr>
+				<td><button type="submit" name="btn-post">Submit</button></td>
+				</tr>
+				</table>
+			    </form>
+			    
             <!-- footer starts here -->
             <footer>
                 <div id="footer">
@@ -117,6 +173,6 @@ if(isset($_POST['btn-login']))
                 </div>
             </footer>
             <!-- footer ends here -->
-            </div>
+        </div>
 </body>
 </html>

@@ -15,13 +15,13 @@ if(isset($_POST['btn-signup']))
 	if(mysql_query("INSERT INTO users(username,email,password) VALUES('$uname','$email','$upass')"))
 	{
 		?>
-        <script>alert('successfully registered ');</script>
+        <script>alert('You successfully registered ');</script>
         <?php
 	}
 	else
 	{
 		?>
-        <script>alert('error while registering you...');</script>
+        <script>alert('There was an error while registering you...');</script>
         <?php
 	}
 }

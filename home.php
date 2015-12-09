@@ -47,6 +47,15 @@ if(isset($_POST['btn-login']))
         <title>Official Dunwoody Ping Pong</title>
         <link rel="stylesheet" href="main.css" type="text/css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
+	<style type="text/css">
+		#rules
+		{
+			border: solid thin black;
+			width: 800px;
+			height: 800px;
+			margin: 5px auto 20px auto;
+		}
+	</style>
     </head>
 <body>
         <div id="wrapper">
@@ -103,6 +112,42 @@ if(isset($_POST['btn-login']))
 			        more when defeating higher quality competition and only slightly when defeating
 			        lower quality competition.
 			        </p>
+				<div id="rules">
+					<h1 style="font-weight: bold; text-align: center; font-weight: bold; font-size: 2.8em; margin: 5px auto -15px auto;">
+						Official Dunwoody Ping Pong Rules
+					</h1>
+					<h1 style="font-weight: bold; margin-left: 15px;">Serving:</h1>
+					<p class="mainpara">
+					The ball  must be tossed up at least 6 inches and struck so the ball first bounces
+					on the server's side and then the opponent's side.
+					<br />
+					<br />
+					The ball can be served anywhere on the opponents side of the table, meaning it does
+					not have to be served diagonally from opposite boxes. The ball can be served from
+					any location and be hit straight, diagonally, etc.
+					<br />
+					<br />
+					If the serve is legal except that it touches the net, it is called a let serve.
+					Let serves are not scored and are re-served.
+					<br />
+					<br />
+					To determine who serves the ball first, the two players will volly. The ball must be
+					hit twice by each person for it to be a valid volly.
+					
+					<h1 style="font-weight: bold; margin-left: 15px;">Scoring:</h1>
+					<p class="mainpara">
+					A match is played best 2 of 3 games. For each game, the first player to reach 21
+					points wins that game, however a game must be won by at least a two point margin.
+					A point is scored after each ball is put into play (not just when the server
+					wins the point as in volleyball).
+					</p>
+					<h1 style="font-weight: bold; margin-left: 15px;">Flow of game:</h1>
+					<p class="mainpara">
+					Each player serves five points in a row and then switch server. However, if a score
+					of 20-20 is reached in any game, then each server serves only one point and then
+					the server is switched.
+					</p>	
+				</div>
             </div>
             
             <!-- Main content ends here -->
