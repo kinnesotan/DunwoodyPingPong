@@ -43,13 +43,32 @@ if(isset($_POST['btn-login']))
 }
 if(isset($_POST['btn-post']))
 {
+	$opponent = $_POST["opponent"];
+	//$opponent = array_key_exists('opponent', $_POST) ? $_POST['opponent'] : false;
 	
 	$userscore = mysql_real_escape_string($_POST['userscore']);
-	$oppscore = md5(mysql_real_escape_string($_POST['oppscore']));
+	$oppscore = mysql_real_escape_string($_POST['oppscore']);
+	if($userscore > $oppscore)
+	{
+		$Winner_ID = $_SESSION['user'];
+		$query = mysql_query("SELECT user_id FROM users WHERE username = '".$opponent."'");
+		if (!$query) {
+			echo 'Could not run query: ' . mysql_error();
+			exit;
+		}
+		$result = mysql_fetch_array($query) or die(mysql_error());
+		$Loser_ID = $result['user_id']; 
+	}	
+	else
+	{		
+		$Loser_ID = $_SESSION['user'];
+		$query = mysql_query("SELECT user_id FROM users WHERE username = ".$_POST['opponent']);
+		
+		$result = mysql_fetch_array($query) or die(mysql_error());
+		$Winner_ID = $result['user_id']; 
+	}
 	
-	
-	echo $_GET["oppscore"];
-	if(mysql_query("INSERT INTO games(winloss,userscore,oppscore) VALUES('$userscore','$oppscore')"))
+	if(mysql_query("INSERT INTO games(WinnerID,LoserID,userscore,oppscore) VALUES('$Winner_ID','$Loser_ID','$userscore','$oppscore')"))
 	{
 		?>
 		<script>alert('Your scores were successfully entered');</script>
@@ -125,13 +144,11 @@ if(isset($_POST['btn-post']))
 				<tr>
 				<td>
 				    Choose your opponent:
-				     <select>
+				     <select id='opponent' name='opponent'>
 					    <?php
 						    include 'dbconnect.php';
 						    $id = mysql_real_escape_string($_SESSION['user']);
-						    //$search = mysql_query("SELECT user_id, username FROM games WHERE user_id!=" + $id);
-						    //$search = mysql_query("SELECT user_id FROM users");
-						    $search = mysql_query("SELECT username FROM users");
+						    $search = mysql_query("SELECT username, user_id FROM users WHERE user_id!=".$_SESSION['user']);
 						    $result = mysql_fetch_assoc($search);
 						    $totalRows = mysql_num_rows($search);
 						    
