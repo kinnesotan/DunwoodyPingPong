@@ -38,6 +38,7 @@ if(isset($_POST['btn-signup']))
 			margin-top: -15px;
 		}
 	</style>
+	
 </head>
 	<body>
 		<div id="wrapper">
