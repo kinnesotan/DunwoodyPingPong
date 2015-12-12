@@ -90,19 +90,31 @@ if(isset($_POST['btn-login']))
 			        <div id="headline">
 				    <h3>These are the offical Dunwoody Ping Pong Rankings</h3>
 			        </div>
-			        <p class="mainpara">
-			        This is the official site to keep track of ping pong scores and rankings at
-			        Dunwoody College of Technology. You can check the official player rankings
-			        of every registered ping pong player at Dunwooody. Enter your scores to try
-			        claim the number one ranking.
-			        </p>
-			        <p class="mainpara">
-			        Overall ranking is dependent on wins and losses as well as quality of competition.
-			        If you defeat a player ranked higher than you, you will move up. If you lose to
-			        someone ranked higher than you, you will not lose rank. Your ranking will move up
-			        more when defeating higher quality competition and only slightly when defeating
-			        lower quality competition.
-			        </p>
+			        <h1 style="text-align: center; font-weight:bold;">Official Rankings</h1>
+				<table style="margin-bottom: 20px;" align="center" border="1" width="90%">
+				<tr>
+				<th>Username</th>
+				<th>Wins</th>
+				<th>Points For</th>
+				<th>Points Against</th>
+				<th>Ranking</th>
+				</tr>
+					<?php
+						$res=mysql_query("SELECT min(u.username), COUNT(g.WinnerID), sum(g.PointsFor), sum(g.PointsAgainst), Elo from games g LEFT JOIN users u on g.WinnerID = u.user_id Group by g.WinnerID");
+						while($row=mysql_fetch_array($res))
+						{
+						 ?>
+						    <tr>
+						    <td style="text-align: center;"><p><?php echo $row['min(u.username)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['COUNT(g.WinnerID)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['sum(g.PointsFor)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['sum(g.PointsAgainst)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['Elo']; ?></p></td>
+						    </tr>
+						    <?php
+						}
+					?>
+				</table>
             </div>
             
             <!-- Main content ends here -->

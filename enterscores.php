@@ -49,22 +49,81 @@ if(isset($_POST['btn-post']))
 	$userscore = mysql_real_escape_string($_POST['userscore']);
 	$oppscore = mysql_real_escape_string($_POST['oppscore']);
 	
-	
-	if($userscore > $oppscore)
+	if($userscore != $oppscore)
 	{
-		$Winner_ID = $_SESSION['user'];
-		$query = mysql_query("SELECT user_id FROM users WHERE username = '".$opponent."'");
-		$result = mysql_fetch_array($query) or die(mysql_error());
-		$Loser_ID = $result['user_id'];
+		if($userscore > $oppscore)
+		{
+			$Winner_ID = $_SESSION['user'];
+			$query = mysql_query("SELECT user_id FROM users WHERE username = '".$opponent."'");
+			$result = mysql_fetch_array($query) or die(mysql_error());
+			$Loser_ID = $result['user_id'];
+			
 		
-		//get rating from user table in database
-		/*
-		$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
-		$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_POST['opponent']);
-		$rating = new Rating($winnerRating, $loserRating, 1, 0);
-		
-		$results = $rating->getNewRatings();
-		if(mysql_query("UPDATE users SET Elo = '".$Winner_ID"' WHERE user_id=".$_SESSION['user']);
+			$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
+			$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
+			$rating = new Rating($winnerRating, $loserRating, 1, 0);
+			
+			$results = $rating->getNewRatings();
+			
+			if(mysql_query("UPDATE users SET Elo = " . $results['a'] . " WHERE user_id=".$_SESSION['user']))
+			{
+
+			}
+			else
+			{
+				?>
+				<script>alert('There was an error while entering winners(user) ranking...');</script>
+				<?php
+			}
+			if(mysql_query("UPDATE users SET Elo = " . $results['b'] . " WHERE user_id=".$Loser_ID))
+			{
+			
+			}
+			else
+			{
+				?>
+				<script>alert('There was an error while entering losers(opp) ranking..');</script>
+				<?php
+			}
+			
+		}	
+		elseif($oppscore > $userscore)
+		{		
+			$Loser_ID = $_SESSION['user'];
+			$query = mysql_query("SELECT user_id FROM users WHERE username = '".$opponent."'");
+			$result = mysql_fetch_array($query) or die(mysql_error());
+			$Winner_ID = $result['user_id'];
+			
+			//get rating from user table in database
+			
+			$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
+			$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$Winner_ID);
+			$rating = new Rating($winnerRating, $loserRating, 1, 0);
+			
+			$results = $rating->getNewRatings();
+			if(mysql_query("UPDATE users SET Elo = " . $results['b'] . " WHERE user_id=".$_SESSION['user']))
+			{
+
+			}
+			else
+			{
+				?>
+				<script>alert('There was an error while entering losers(user) ranking...');</script>
+				<?php
+			}
+			if(mysql_query("UPDATE users SET Elo = " . $results['a'] . " WHERE user_id=".$Winner_ID))
+			{
+
+			}
+			else
+			{
+				?>
+				<script>alert('There was an error while entering winners(opp) ranking...');</script>
+				<?php
+			}
+			
+		}
+		if(mysql_query("INSERT INTO games(WinnerID,LoserID,PointsFor,PointsAgainst) VALUES('$Winner_ID','$Loser_ID','$userscore','$oppscore')"))
 		{
 			?>
 			<script>alert('Your scores were successfully entered');</script>
@@ -76,73 +135,14 @@ if(isset($_POST['btn-post']))
 			<script>alert('There was an error while entering your score...');</script>
 			<?php
 		}
-		if(mysql_query("UPDATE users SET Elo = '".$Loser_ID"' WHERE user_id=".$_POST['opponent']);
-		{
-			?>
-			<script>alert('Your scores were successfully entered');</script>
-			<?php
-		}
-		else
-		{
-			?>
-			<script>alert('There was an error while entering your score...');</script>
-			<?php
-		}
-		*/
-	}	
-	else
-	{		
-		$Loser_ID = $_SESSION['user'];
-		$query = mysql_query("SELECT user_id FROM users WHERE username = ".$_POST['opponent']);
-		$result = mysql_fetch_array($query) or die(mysql_error());
-		$Winner_ID = $result['user_id'];
-		
-		//get rating from user table in database
-		/*
-		$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
-		$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_POST['opponent']);
-		$rating = new Rating($winnerRating, $loserRating, 1, 0);
-		
-		$results = $rating->getNewRatings();
-		if(mysql_query("UPDATE users SET Elo = '".$Loser_ID"' WHERE user_id=".$_SESSION['user']);
-		{
-			?>
-			<script>alert('Your scores were successfully entered');</script>
-			<?php
-		}
-		else
-		{
-			?>
-			<script>alert('There was an error while entering your score...');</script>
-			<?php
-		}
-		if(mysql_query("UPDATE users SET Elo = '".$Winnerr_ID"' WHERE user_id=".$_POST['opponent']);
-		{
-			?>
-			<script>alert('Your scores were successfully entered');</script>
-			<?php
-		}
-		else
-		{
-			?>
-			<script>alert('There was an error while entering your score...');</script>
-			<?php
-		}
-		*/
 	}
-	
-	if(mysql_query("INSERT INTO games(WinnerID,LoserID,PointsFor,PointsAgainst) VALUES('$Winner_ID','$Loser_ID','$userscore','$oppscore')"))
+	else
 	{
 		?>
-		<script>alert('Your scores were successfully entered');</script>
+		<script>alert('There cannot be a tie in ping pong, please re-enter your scores...');</script>
 		<?php
 	}
-	else
-	{
-		?>
-		<script>alert('There was an error while entering your score...');</script>
-		<?php
-	}
+
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
