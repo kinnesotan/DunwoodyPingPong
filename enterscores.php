@@ -58,11 +58,15 @@ if(isset($_POST['btn-post']))
 			$result = mysql_fetch_array($query) or die(mysql_error());
 			$Loser_ID = $result['user_id'];
 			
-		
-			$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
-			$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
-			$rating = new Rating($winnerRating, $loserRating, 1, 0);
+			$query1 = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
+			$result1 = mysql_fetch_array($query1) or die(mysql_error());
+			$winnerRating = $result1['Elo'];
 			
+			$query2 = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
+			$result2 = mysql_fetch_array($query2) or die(mysql_error());
+			$loserRating = $result1['Elo'];
+			
+			$rating = new Rating($winnerRating, $loserRating, 1, 0);			
 			$results = $rating->getNewRatings();
 			
 			if(mysql_query("UPDATE users SET Elo = " . $results['a'] . " WHERE user_id=".$_SESSION['user']))
@@ -96,14 +100,21 @@ if(isset($_POST['btn-post']))
 			
 			//get rating from user table in database
 			
-			$loserRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
-			$winnerRating = mysql_query("SELECT Elo FROM users WHERE user_id=".$Winner_ID);
-			$rating = new Rating($winnerRating, $loserRating, 1, 0);
+			$query1 = mysql_query("SELECT Elo FROM users WHERE user_id=".$_SESSION['user']);
+			$result1 = mysql_fetch_array($query1) or die(mysql_error());
+			$loserRating = $result1['Elo'];
+			
+			$query2 = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
+			$result2 = mysql_fetch_array($query2) or die(mysql_error());
+			$winnerRating = $result1['Elo'];
+			
+			$rating = new Rating($winnerRating, $loserRating, 1, 0);			
+			$results = $rating->getNewRatings();
 			
 			$results = $rating->getNewRatings();
 			if(mysql_query("UPDATE users SET Elo = " . $results['b'] . " WHERE user_id=".$_SESSION['user']))
 			{
-
+				
 			}
 			else
 			{

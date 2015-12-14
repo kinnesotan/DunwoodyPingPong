@@ -88,7 +88,7 @@ if(isset($_POST['btn-login']))
             <div id="main">
 			    <br>
 			        <div id="headline">
-				    <h3>These are the offical Dunwoody Ping Pong Rankings</h3>
+				    <h3>These are the official Dunwoody Ping Pong Rankings</h3>
 			        </div>
 			        <h1 style="text-align: center; font-weight:bold;">Official Rankings</h1>
 				<table style="margin-bottom: 20px;" align="center" border="1" width="90%">
