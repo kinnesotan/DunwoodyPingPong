@@ -45,7 +45,13 @@
 		border-bottom: solid 2px #A31929;
 		border-top: solid 2px #A31929;
             }
-            
+            #rules
+		{
+			border: solid thin black;
+			width: 800px;
+			height: 800px;
+			margin: 5px auto 20px auto;
+		}
             #headline {
                 margin: 10px 0 0 18px;
                 color: white;
