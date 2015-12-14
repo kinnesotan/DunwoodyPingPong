@@ -9,11 +9,11 @@ Features added
   -Score entry
   -Ranking entry
   -Display ranking
+  -Ranking formula
 
 Features Currently being worked on
   
   -Responsive/Mobile design
-  -Ranking formula (not calculating Elo correctly)
   -Email Confirmation
   
 Future Features
