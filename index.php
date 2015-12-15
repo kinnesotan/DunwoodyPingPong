@@ -17,7 +17,7 @@ if(isset($_POST['btn-login']))
 	if($row['password']==md5($upass))
 	{
 		$_SESSION['user'] = $row['user_id'];
-		header("Location: home.php");
+		header("Location: enterscores.php");
 	}
 	else
 	{
@@ -36,6 +36,11 @@ if(isset($_POST['btn-login']))
         <title>Official Dunwoody Ping Pong | Log in</title>
         <link rel="stylesheet" href="main.css" type="text/css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
+	<style type="text/css">
+		#main {
+			margin-top: -15px;
+		}
+	</style>
     </head>
 <body>
         <div id="wrapper">
