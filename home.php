@@ -48,7 +48,6 @@ if(isset($_POST['btn-login']))
         <link rel="stylesheet" href="main.css" type="text/css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
 	<style type="text/css">
-		
 	</style>
     </head>
 <body>

@@ -95,21 +95,53 @@ if(isset($_POST['btn-login']))
 				<tr>
 				<th>Username</th>
 				<th>Wins</th>
+				<th>Losses</th>
 				<th>Points For</th>
 				<th>Points Against</th>
 				<th>Ranking</th>
 				</tr>
 					<?php
-						$res=mysql_query("SELECT min(u.username), COUNT(g.WinnerID), sum(g.PointsFor), sum(g.PointsAgainst), Elo from games g LEFT JOIN users u on g.WinnerID = u.user_id Group by g.WinnerID");
+						$res=mysql_query("SELECT  username,
+									SUM(wins),
+									SUM(loss),
+									SUM(PF),
+									SUM(PA),
+									elo
+								    FROM (
+									(SELECT users.user_ID,
+										users.username AS username,
+										COUNT(games.WinnerID) AS wins,
+										0 AS loss,
+										SUM(games.PointsFor) AS PF,
+										SUM(games.PointsAgainst) AS PA,
+										users.Elo AS elo
+									FROM users, games
+									WHERE games.WinnerID = users.user_ID
+									GROUP BY users.user_ID)
+									UNION ALL
+									(SELECT users.user_ID,
+									    users.username AS username,
+									    0 AS wins,
+									    COUNT(games.LoserID) AS loss,
+									    SUM(games.PointsAgainst) AS PF,
+									    SUM(games.PointsFor) AS PA,
+									    users.Elo AS elo
+									FROM users, games
+									WHERE games.LoserID = users.user_ID
+									GROUP BY users.user_ID)
+								    ) AS t
+								    GROUP BY username
+								    ORDER BY user_ID;");
 						while($row=mysql_fetch_array($res))
 						{
 						 ?>
 						    <tr>
-						    <td style="text-align: center;"><p><?php echo $row['min(u.username)']; ?></p></td>
-						    <td style="text-align: center;"><p><?php echo $row['COUNT(g.WinnerID)']; ?></p></td>
-						    <td style="text-align: center;"><p><?php echo $row['sum(g.PointsFor)']; ?></p></td>
-						    <td style="text-align: center;"><p><?php echo $row['sum(g.PointsAgainst)']; ?></p></td>
-						    <td style="text-align: center;"><p><?php echo $row['Elo']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['username']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(wins)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(loss)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(PF)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(PA)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td>
 						    </tr>
 						    <?php
 						}
