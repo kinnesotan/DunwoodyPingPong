@@ -3,12 +3,13 @@ Dunwoody Ping Pong Ranking System
 
 Features added
   
-  -Working Web Design
-  -User sign up
-  -User Login
-  -Score entry
-  -Ranking entry
-  -Display ranking
+  -Working Web Design (COMPLETE) - Linux pending
+  -User sign up (COMPLETE)
+  -User Login (COMPLETE)
+  -Score entry (COMPLETE)
+  -Ranking entry (COMPLETE)
+  -Display ranking (COMPLETE)
+        -Displays Username, Wins, Losses, Points For, Points Against, and Ranking
   -Ranking formula
 
 Features Currently being worked on

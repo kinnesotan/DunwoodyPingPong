@@ -131,7 +131,7 @@ if(isset($_POST['btn-login']))
 									GROUP BY users.user_ID)
 								    ) AS t
 								    GROUP BY username
-								    ORDER BY user_ID;");
+								    ORDER BY elo desc;");
 						while($row=mysql_fetch_array($res))
 						{
 						 ?>
