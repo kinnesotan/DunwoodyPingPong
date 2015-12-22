@@ -1,0 +1,123 @@
+
+  .wrapper {
+    display: none !important;
+  }
+  .mobile-view {
+    width: 100%;
+  }
+    /* Initial body */
+    body {
+      left: 0;
+      margin: 0;
+      position: relative;
+      font-family: sans-serif;
+    }
+    
+    /* Initial menu */
+    .menu {
+      background: #771929;
+      left: -285px;  /* start off behind the scenes */
+      height: 100%;
+      position: fixed;
+      width: 285px;
+    }
+    
+    /* Basic styling */
+    
+    .jumbotron {
+      background-color: black; 
+      height: 100%;
+      -webkit-background-size: cover;
+         -moz-background-size: cover;
+           -o-background-size: cover;
+              background-size: cover;
+    }
+    
+    .menu ul {
+      border-top: 1px solid #636366;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .menu li {
+      border-bottom: 1px solid #636366;
+      font-family: sans-serif;
+      line-height: 45px;
+      padding-bottom: 3px;
+      padding-left: 20px;
+      padding-top: 3px;
+    }
+    
+    .menu a {
+      color: #fff;
+      font-size: 1.2em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    
+    .icon-close {
+      cursor: pointer;
+      padding-left: 15px;
+      padding-top: 5px;
+      padding-bottom: 8px;
+    }
+    
+    .icon-menu {
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      padding-top: 5px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .icon-menu-bar {
+      width: 100%;
+      height: 50px;
+      background-color: #A31929;
+    }
+    .icon-menu i {
+      margin-right: 5px;
+    }
+    .login {
+      width: 50px;
+      height: 35px;
+      margin-top: -37px;
+      margin-right: 40px;
+      float: right;
+      padding-top: 1px;
+    }
+    .login-button {
+      background-color: #771929;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      height: 35px;
+      width: 80px;
+    }
+    /* MAIN BODY STYLES */
+    .header {
+        position: absolute;
+        margin-top: 45px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("logo.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .main {
+      width: 100%;
+      height: auto;
+      margin-top: 28%;
+      background-color: white;
+      clear: both;
+    }
+    /* CONTENT STYLES */
+    .mainpara 
+    {
+	padding: 5px;
+    }
+}
