@@ -98,7 +98,10 @@ if(isset($_POST['btn-login']))
 	
 	<!-- Main body -->
 		
-		<div class="main">
+		<div class="main" style="position: absolute;">
+			<div id="headline">
+				    <h3>About Us</h3>
+			        </div>
 			<p class="mainpara">
 			   This is the official site to keep track of ping pong scores and rankings at
 			   Dunwoody College of Technology. You can check the official player rankings
@@ -112,6 +115,14 @@ if(isset($_POST['btn-login']))
 			   more when defeating higher quality competition and only slightly when defeating
 			   lower quality competition.
 		       </p>
+			   <footer>
+	    <div id="footer">
+		<h4>Dunwoody Ping Pong</h4>
+		818 Dunwoody Blvd | Minneapolis, MN 55403
+		<br>
+		Email: kinmatw@dunwoody.edu | kinandd@dunwoody.edu
+	    </div>
+	</footer>
 		</div>
 	<!-- Main body -->
 	</div>

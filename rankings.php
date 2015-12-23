@@ -97,9 +97,10 @@ if(isset($_POST['btn-login']))
 	
 	<!-- Main body -->
 		
-		<div class="main">
-			<h1 style="text-align: center; font-weight:bold;">Official Rankings</h1>
-			<table style=""  align="center" border="1" width="90%">
+		<div class="main" >
+			
+			<h1 style="text-align: center; font-weight:bold; padding-top: 30px;">Official Rankings</h1>
+			<table style="margin-bottom: 20px;"  align="center" border="1" width="90%">
 			<tr>
 			<th>Username</th>
 			<th>Wins</th>
@@ -155,11 +156,16 @@ if(isset($_POST['btn-login']))
 					}
 				?>
 			</table>
+			<footer>
+	    <div id="footer">
+		<h4>Dunwoody Ping Pong</h4>
+		818 Dunwoody Blvd | Minneapolis, MN 55403
+		<br>
+		Email: kinmatw@dunwoody.edu | kinandd@dunwoody.edu
+	    </div>
+	</footer>
 		</div>
 	<!-- Main body -->
-	<div class="space">
-		
-	</div>
 	</div>
 </div>     
 <!-- MOBILE CONTENT ENDS HERE -->  

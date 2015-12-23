@@ -214,6 +214,7 @@ if(isset($_POST['btn-post']))
 	
 	<!-- Main body -->
 		<div class="main" style="position: absolute;">
+			<div id="headline"><h3>Enter your ping pong scores here</h3></div>
 			<form method="post">
 				<table align="center" width="80%" border="0">
 				<tr>

@@ -100,7 +100,10 @@ if(isset($_POST['btn-login']))
 	
 	<!-- Main body -->
 		
-		<div class="main">
+		<div class="main" style="position: absolute;">
+			<div id="headline">
+				<h3 style="font-size: .9em;">Welcome to the official Dunwoody Ping Pong Site</h3>
+			    </div>
 			<p class="mainpara">
 			   This is the official site to keep track of ping pong scores and rankings at
 			   Dunwoody College of Technology. You can check the official player rankings
@@ -150,9 +153,22 @@ if(isset($_POST['btn-login']))
 				    the server is switched.
 				    </p>	
 			    </div>
+			<!-- footer starts here -->
+	<footer>
+	    <div id="footer">
+		<h4>Dunwoody Ping Pong</h4>
+		818 Dunwoody Blvd | Minneapolis, MN 55403
+		<br>
+		Email: kinmatw@dunwoody.edu | kinandd@dunwoody.edu
+	    </div>
+	</footer>
+	<!-- footer ends here -->
 		</div>
 	<!-- Main body -->
+	
+	
 	</div>
+	
 </div>     
 <!-- MOBILE CONTENT ENDS HERE -->  
 <div id="wrapper">
@@ -192,7 +208,7 @@ if(isset($_POST['btn-login']))
 	<div id="main">
 			<br>
 			    <div id="headline">
-				<h3>Welcome to the official Dunwoody Ping Pong Website</h3>
+				<h3>Welcome to the official Dunwoody Ping Pong Site</h3>
 			    </div>
 			    <p class="mainpara">
 			    This is the official site to keep track of ping pong scores and rankings at

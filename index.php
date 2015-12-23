@@ -37,11 +37,6 @@ if(isset($_POST['btn-login']))
         <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
 	<link rel="stylesheet" media="(max-width: 999px)" href="mobile/style.css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
-	<style type="text/css">
-		#main {
-			margin-top: -15px;
-		}
-	</style>
     </head>
 <body>
 	<!-- MOBILE CONTENT STARTS HERE -->
@@ -81,6 +76,7 @@ if(isset($_POST['btn-login']))
 	<!-- Main body -->
 		
 		<div class="main" style="position: absolute;">
+			<div id="headline"><h3>Please enter your login information</h3></div>
 				<form method="post">
 					<table align="center" width="80%" border="0">
 					<tr>
