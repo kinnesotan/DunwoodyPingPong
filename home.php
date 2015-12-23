@@ -65,10 +65,10 @@ if(isset($_POST['btn-login']))
     
 	  <!-- Menu -->
 	  <ul>
-	    <li><a href="#">Home</a></li>
-	    <li><a href="#">Ranking</a></li>
-	    <li><a href="#">Enter Scores</a></li>
-	    <li><a href="#">About Us</a></li>
+	    <li><a href="home.php">Home</a></li>
+	    <li><a href="rankings.php">Ranking</a></li>
+	    <li><a href="enterscores.php">Enter Scores</a></li>
+	    <li><a href="aboutus.php">About Us</a></li>
 	  </ul>
 	</div>
     
@@ -79,10 +79,19 @@ if(isset($_POST['btn-login']))
 	      <i class="fa fa-bars"></i>
 	      <img src="mobile/menu-icon.png" width="38" height="38" alt="menu icon">
 	    </div>
-	    <div class="login">
-	      <form action="index.php">
-		  <input  class="login-button" type="submit" value="LOG IN">
-	      </form>
+	    <div id="login">
+		<div id="loginfields">
+			<?php
+				$res=mysql_query("SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+				$userRow=mysql_fetch_array($res);
+			?>
+			<span id="loggedin">Hi <?php echo $userRow['username']; ?>: <span id="logout"><a href="logout.php?logout">Sign Out</a></span></span>
+                </div>
+		<div id="loginfields2">
+			<form action="index.php">
+			    <input  class="login-button" type="submit" value="LOG IN">
+			</form>
+		</div>
 	    </div>
 	  </div>
 	<script src="mobile/jquery-1.11.3.js"></script>
@@ -106,10 +115,10 @@ if(isset($_POST['btn-login']))
 			   lower quality competition.
 		       </p>
 			<div id="rules">
-				    <h1 style="font-weight: bold; text-align: center; font-weight: bold; font-size: 2.8em; margin: 5px auto -15px auto;">
+				    <h1 style="font-weight: bold; text-align: center; font-weight: bold; font-size: 2.1em; margin: 5px auto -15px auto;">
 					    Official Dunwoody Ping Pong Rules
 				    </h1>
-				    <h1 style="font-weight: bold; margin-left: 15px;">Serving:</h1>
+				    <h1 style="font-weight: bold; margin-left: 10px;">Serving:</h1>
 				    <p class="mainpara">
 				    The ball  must be tossed up at least 6 inches and struck so the ball first bounces
 				    on the server's side and then the opponent's side.
@@ -127,14 +136,14 @@ if(isset($_POST['btn-login']))
 				    To determine who serves the ball first, the two players will volly. The ball must be
 				    hit twice by each person for it to be a valid volly.
 				    
-				    <h1 style="font-weight: bold; margin-left: 15px;">Scoring:</h1>
+				    <h1 style="font-weight: bold; margin-left: 10px;">Scoring:</h1>
 				    <p class="mainpara">
 				    A match is played best 2 of 3 games. For each game, the first player to reach 21
 				    points wins that game, however a game must be won by at least a two point margin.
 				    A point is scored after each ball is put into play (not just when the server
 				    wins the point as in volleyball).
 				    </p>
-				    <h1 style="font-weight: bold; margin-left: 15px;">Flow of game:</h1>
+				    <h1 style="font-weight: bold; margin-left: 10px;">Flow of game:</h1>
 				    <p class="mainpara">
 				    Each player serves five points in a row and then switch server. However, if a score
 				    of 20-20 is reached in any game, then each server serves only one point and then
@@ -159,7 +168,7 @@ if(isset($_POST['btn-login']))
 		    <form method="post">
 			    <input type="text" name="email" placeholder="Your Email" required />&nbsp;&nbsp;
 			    <input type="password" name="pass" placeholder="Your Password" required />&nbsp;&nbsp;
-			    <button type="submit" name="btn-login">Sign In</button>
+			    <input  class="login-button" name="btn-login" type="submit" value="LOG IN">
 			    <br />
 			    <span id="register" ><a href="register.php">Not a member yet? Sign up here!</a></span>
 		    </form>

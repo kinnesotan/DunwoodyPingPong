@@ -79,13 +79,13 @@
     .icon-menu i {
       margin-right: 5px;
     }
-    .login {
-      width: 50px;
+    #login {
+      width: 120px;
       height: 35px;
       margin-top: -37px;
-      margin-right: 40px;
-      float: right;
-      padding-top: 1px;
+
+        float: right;
+        padding-top: 1px;
     }
     .login-button {
       background-color: #771929;
@@ -94,6 +94,49 @@
       color: white;
       height: 35px;
       width: 80px;
+    }
+    #loggedin
+    {
+	text-decoration: none;
+	color: White;
+	padding-top: 2px;
+
+    }
+    #loggedin a
+    {
+	text-decoration: none;
+	
+    }
+    #loggedin a:visited
+    {
+	color: White;
+    }
+    #loginfields {
+        width: 20-0px;
+        margin-left: -100px;
+        font-size: 1.5em;
+    }
+    #loginfields2 {
+        width: 150px;
+        margin-left: 30px;
+    }
+    span #logout
+    {
+	background: #808080;
+	background:-moz-linear-gradient(top, #595959 , #515151);
+	border-radius:3px;
+	box-shadow: 1px 1px 1px rgba(1,0,0,0.2);
+	color:#f9f9f9;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:.8em;
+        padding: 2px;
+	font-weight:bold;
+	text-transform:uppercase;
+    }
+    span #logout:active
+    {
+	position:relative;
+	top:1px;
     }
     /* MAIN BODY STYLES */
     .header {
@@ -110,13 +153,38 @@
     .main {
       width: 100%;
       height: auto;
+      font-size: 1.1em;
       margin-top: 28%;
       background-color: white;
       clear: both;
     }
+    #rules {
+        border: solid thin black;
+        width: 95%;
+        margin: 0 auto;
+    }
     /* CONTENT STYLES */
     .mainpara 
     {
-	padding: 5px;
+	padding: 10px;
+        
+    }
+    .space {
+        height: 400px;
+        width: 100%;
+        background-color: white;
+    }
+    .login-button-index {
+      background-color: #771929;
+      font-size: 1em;
+      font-weight: bold;
+      color: white;
+      height: 35px;
+      width: 100%;
+    }
+    .login-index {
+        width: 100%;
+        height: 40px;
+        font-size: 1.3em;
     }
 }

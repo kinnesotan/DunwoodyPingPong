@@ -161,7 +161,8 @@ if(isset($_POST['btn-post']))
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Enter your scores | Dunwoody Ping Pong</title>
-        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
+	<link rel="stylesheet" media="(max-width: 999px)" href="mobile/style.css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
 	<style type="text/css">
 		#main
@@ -171,6 +172,99 @@ if(isset($_POST['btn-post']))
 	</style>
     </head>
 <body>
+	<!-- MOBILE CONTENT STARTS HERE -->
+<div class="mobile-view">
+	<div class="header"></div> 
+	<div class="menu">
+	  
+	  <!-- Menu icon -->
+	  <div class="icon-close">
+	    <img src="mobile/close-menu-icon.png" width="38" height="38" alt="menu icon">
+	  </div>
+    
+	  <!-- Menu -->
+	  <ul>
+	    <li><a href="home.php">Home</a></li>
+	    <li><a href="rankings.php">Ranking</a></li>
+	    <li><a href="enterscores.php">Enter Scores</a></li>
+	    <li><a href="aboutus.php">About Us</a></li>
+	  </ul>
+	</div>
+    
+	<!-- Top bar body -->
+	<div class="jumbotron">
+	  <div class="icon-menu-bar">
+	    <div class="icon-menu">
+	      <i class="fa fa-bars"></i>
+	      <img src="mobile/menu-icon.png" width="38" height="38" alt="menu icon">
+	    </div>
+	    <div id="login">
+		<div id="loginfields">
+			<?php
+				$res=mysql_query("SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+				$userRow=mysql_fetch_array($res);
+			?>
+			<span id="loggedin">Hi <?php echo $userRow['username']; ?>: <span id="logout"><a href="logout.php?logout">Sign Out</a></span></span>
+                </div>
+	    </div>
+	  </div>
+	<script src="mobile/jquery-1.11.3.js"></script>
+	<script src="mobile/app.js"></script>
+	<!-- Top bar body -->
+	
+	<!-- Main body -->
+		<div class="main" style="position: absolute;">
+			<form method="post">
+				<table align="center" width="80%" border="0">
+				<tr>
+				<td style="font-size: 1.1em;">
+				    Choose your opponent:
+				     <select id='opponent' name='opponent'>
+					    <?php
+						    include 'dbconnect.php';
+						    $id = mysql_real_escape_string($_SESSION['user']);
+						    $search = mysql_query("SELECT username, user_id FROM users WHERE user_id!=".$_SESSION['user']);
+						    $result = mysql_fetch_assoc($search);
+						    $totalRows = mysql_num_rows($search);
+						    
+						    
+						    echo $result['user_id'];
+						    do {  
+							    ?>
+							    <option value="<?php echo $result['username'] ?>"<?php if (!(strcmp($result['username'], $result['username']))) {echo "selected=\"selected\"";} ?>><?php echo $result['username']?></option>
+							    <?php
+						    } while ($result = mysql_fetch_assoc($search));
+						      $rows = mysql_num_rows($search);
+						      if($rows > 0) {
+							  mysql_data_seek($search, 0);
+							  $result = mysql_fetch_assoc($search);
+						      }
+					    ?>
+				     </select>	 
+				</td>
+				</tr>
+				<tr>
+				<td><input class="login-index" type="text" name="userscore" placeholder="Enter your score" required /></td>
+				</tr>
+				<tr>
+				<td><input class="login-index" type="text" name="oppscore" placeholder="Enter opponent's score" required /></td>
+				</tr>
+				<tr>
+				<td><input  class="login-button-index" name="btn-post" type="submit" value="Submit"></td>
+				</tr>
+				</table>
+			    </form>	
+		</div>
+		
+	<!-- Main body -->
+	<div class="space">
+		
+	</div>
+	</div>
+</div>     
+<!-- MOBILE CONTENT ENDS HERE -->  
+	
+	
         <div id="wrapper">
             <div id="login">
                 <div id="loginfields">
@@ -191,7 +285,7 @@ if(isset($_POST['btn-post']))
 		</div>
             </div>
             
-            </div>
+            
             <header></header>
             
             <!-- Navigation starts here -->
@@ -265,5 +359,6 @@ if(isset($_POST['btn-post']))
             </footer>
             <!-- footer ends here -->
         </div>
+	</div>
 </body>
 </html>

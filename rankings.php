@@ -45,10 +45,124 @@ if(isset($_POST['btn-login']))
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Official Rankings | Dunwoody Ping Pong</title>
-        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
+	<link rel="stylesheet" media="(max-width: 999px)" href="mobile/style.css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
     </head>
 <body>
+	<!-- MOBILE CONTENT STARTS HERE -->
+<div class="mobile-view">
+	<div class="header"></div> 
+	<div class="menu">
+	  
+	  <!-- Menu icon -->
+	  <div class="icon-close">
+	    <img src="mobile/close-menu-icon.png" width="38" height="38" alt="menu icon">
+	  </div>
+    
+	  <!-- Menu -->
+	  <ul>
+	    <li><a href="home.php">Home</a></li>
+	    <li><a href="rankings.php">Ranking</a></li>
+	    <li><a href="enterscores.php">Enter Scores</a></li>
+	    <li><a href="aboutus.php">About Us</a></li>
+	  </ul>
+	</div>
+    
+	<!-- Top bar body -->
+	<div class="jumbotron">
+	  <div class="icon-menu-bar">
+	    <div class="icon-menu">
+	      <i class="fa fa-bars"></i>
+	      <img src="mobile/menu-icon.png" width="38" height="38" alt="menu icon">
+	    </div>
+	    <div id="login">
+		<div id="loginfields">
+			<?php
+				$res=mysql_query("SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+				$userRow=mysql_fetch_array($res);
+			?>
+			<span id="loggedin">Hi <?php echo $userRow['username']; ?>: <span id="logout"><a href="logout.php?logout">Sign Out</a></span></span>
+                </div>
+		<div id="loginfields2">
+			<form action="index.php">
+			    <input  class="login-button" type="submit" value="LOG IN">
+			</form>
+		</div>
+	    </div>
+	  </div>
+	<script src="mobile/jquery-1.11.3.js"></script>
+	<script src="mobile/app.js"></script>
+	<!-- Top bar body -->
+	
+	<!-- Main body -->
+		
+		<div class="main">
+			<h1 style="text-align: center; font-weight:bold;">Official Rankings</h1>
+			<table style=""  align="center" border="1" width="90%">
+			<tr>
+			<th>Username</th>
+			<th>Wins</th>
+			<th>Losses</th>
+			<th>Points For</th>
+			<th>Points Against</th>
+			<th>Ranking</th>
+			</tr>
+				<?php
+					$res=mysql_query("SELECT  username,
+								SUM(wins),
+								SUM(loss),
+								SUM(PF),
+								SUM(PA),
+								elo
+							    FROM (
+								(SELECT users.user_ID,
+									users.username AS username,
+									COUNT(games.WinnerID) AS wins,
+									0 AS loss,
+									SUM(games.PointsFor) AS PF,
+									SUM(games.PointsAgainst) AS PA,
+									users.Elo AS elo
+								FROM users, games
+								WHERE games.WinnerID = users.user_ID
+								GROUP BY users.user_ID)
+								UNION ALL
+								(SELECT users.user_ID,
+								    users.username AS username,
+								    0 AS wins,
+								    COUNT(games.LoserID) AS loss,
+								    SUM(games.PointsAgainst) AS PF,
+								    SUM(games.PointsFor) AS PA,
+								    users.Elo AS elo
+								FROM users, games
+								WHERE games.LoserID = users.user_ID
+								GROUP BY users.user_ID)
+							    ) AS t
+							    GROUP BY username
+							    ORDER BY elo desc;");
+					while($row=mysql_fetch_array($res))
+					{
+					 ?>
+					    <tr>
+					    <td style="text-align: center;"><p><?php echo $row['username']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(wins)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(loss)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(PF)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(PA)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td>
+					    </tr>
+					    <?php
+					}
+				?>
+			</table>
+		</div>
+	<!-- Main body -->
+	<div class="space">
+		
+	</div>
+	</div>
+</div>     
+<!-- MOBILE CONTENT ENDS HERE -->  
         <div id="wrapper">
             <div id="login">
                 <div id="loginfields">
@@ -62,14 +176,14 @@ if(isset($_POST['btn-login']))
 			<form method="post">
 				<input type="text" name="email" placeholder="Your Email" required />&nbsp;&nbsp;
 				<input type="password" name="pass" placeholder="Your Password" required />&nbsp;&nbsp;
-				<button type="submit" name="btn-login">Sign In</button>
+				<input  class="login-button" name="btn-login" type="submit" value="LOG IN">
 				<br />
 				<span id="register" ><a href="register.php">Not a member yet? Sign up here!</a></span>
 			</form>
 		</div>
             </div>
             
-            </div>
+            
             <header></header>
             
             <!-- Navigation starts here -->
@@ -162,5 +276,6 @@ if(isset($_POST['btn-login']))
             </footer>
             <!-- footer ends here -->
             </div>
+	</div>
 </body>
 </html>
