@@ -43,15 +43,13 @@ if(isset($_POST['btn-login']))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>About US | Dunwoody Ping Pong</title>
+        <title>Official Rankings | Dunwoody Ping Pong</title>
         <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
 	<link rel="stylesheet" media="(max-width: 999px)" href="mobile/style.css" />
         <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
     </head>
 <body>
-	
 	<!-- MOBILE CONTENT STARTS HERE -->
 <div class="mobile-view">
 	<div class="header"></div> 
@@ -99,24 +97,66 @@ if(isset($_POST['btn-login']))
 	
 	<!-- Main body -->
 		
-		<div class="main" style="position: absolute;">
-			<div id="headline">
-				    <h3>About Us</h3>
-			        </div>
-			<p class="mainpara">
-			   This is the official site to keep track of ping pong scores and rankings at
-			   Dunwoody College of Technology. You can check the official player rankings
-			   of every registered ping pong player at Dunwooody. Enter your scores to try
-			   claim the number one ranking.
-			   </p>
-			   <p class="mainpara">
-			   Overall ranking is dependent on wins and losses as well as quality of competition.
-			   If you defeat a player ranked higher than you, you will move up. If you lose to
-			   someone ranked higher than you, you will not lose rank. Your ranking will move up
-			   more when defeating higher quality competition and only slightly when defeating
-			   lower quality competition.
-		       </p>
-			   <footer>
+		<div class="main" >
+			
+			<h1 style="text-align: center; font-weight:bold; padding-top: 30px;">Official Rankings</h1>
+			<table style="margin-bottom: 20px;"  align="center" border="1" width="90%">
+			<tr>
+			<th>Username</th>
+			<th>Wins</th>
+			<th>Losses</th>
+			<th>Points For</th>
+			<th>Points Against</th>
+			<th>Ranking</th>
+			</tr>
+				<?php
+					$res=mysql_query("SELECT  username,
+								SUM(wins),
+								SUM(loss),
+								SUM(PF),
+								SUM(PA),
+								elo
+							    FROM (
+								(SELECT users.user_ID,
+									users.username AS username,
+									COUNT(games.WinnerID) AS wins,
+									0 AS loss,
+									SUM(games.PointsFor) AS PF,
+									SUM(games.PointsAgainst) AS PA,
+									users.Elo AS elo
+								FROM users, games
+								WHERE games.WinnerID = users.user_ID
+								GROUP BY users.user_ID)
+								UNION ALL
+								(SELECT users.user_ID,
+								    users.username AS username,
+								    0 AS wins,
+								    COUNT(games.LoserID) AS loss,
+								    SUM(games.PointsAgainst) AS PF,
+								    SUM(games.PointsFor) AS PA,
+								    users.Elo AS elo
+								FROM users, games
+								WHERE games.LoserID = users.user_ID
+								GROUP BY users.user_ID)
+							    ) AS t
+							    GROUP BY username
+							    ORDER BY elo desc;");
+					while($row=mysql_fetch_array($res))
+					{
+					 ?>
+					    <tr>
+					    <td style="text-align: center;"><p><?php echo $row['username']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(wins)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(loss)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(PF)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['SUM(PA)']; ?></p></td>
+					    <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td>
+					    </tr>
+					    <?php
+					}
+				?>
+			</table>
+			<footer>
 	    <div id="footer">
 		<h4>Dunwoody Ping Pong</h4>
 		818 Dunwoody Blvd | Minneapolis, MN 55403
@@ -168,19 +208,65 @@ if(isset($_POST['btn-login']))
             <div id="main">
 			    <br>
 			        <div id="headline">
-				    <h3>About Us</h3>
+				    <h3>These are the official Dunwoody Ping Pong Rankings</h3>
 			        </div>
-			        <p class="mainpara">
-			        We created the Dunwoody Ping Pong page to see how you rank against other students
-				at Dunwoody. Ping Pong can get very competitive, so why not have a ranking system.
-			        </p>
-			        <p class="mainpara">
-			        Overall ranking is dependent on wins and losses as well as quality of competition.
-			        If you defeat a player ranked higher than you, you will move up. If you lose to
-			        someone ranked higher than you, you will not lose rank. Your ranking will move up
-			        more when defeating higher quality competition and only slightly when defeating
-			        lower quality competition.
-			        </p>
+			        <h1 style="text-align: center; font-weight:bold;">Official Rankings</h1>
+				<table style="margin-bottom: 20px;" align="center" border="1" width="90%">
+				<tr>
+				<th>Username</th>
+				<th>Wins</th>
+				<th>Losses</th>
+				<th>Points For</th>
+				<th>Points Against</th>
+				<th>Ranking</th>
+				</tr>
+					<?php
+						$res=mysql_query("SELECT  username,
+									SUM(wins),
+									SUM(loss),
+									SUM(PF),
+									SUM(PA),
+									elo
+								    FROM (
+									(SELECT users.user_ID,
+										users.username AS username,
+										COUNT(games.WinnerID) AS wins,
+										0 AS loss,
+										SUM(games.PointsFor) AS PF,
+										SUM(games.PointsAgainst) AS PA,
+										users.Elo AS elo
+									FROM users, games
+									WHERE games.WinnerID = users.user_ID
+									GROUP BY users.user_ID)
+									UNION ALL
+									(SELECT users.user_ID,
+									    users.username AS username,
+									    0 AS wins,
+									    COUNT(games.LoserID) AS loss,
+									    SUM(games.PointsAgainst) AS PF,
+									    SUM(games.PointsFor) AS PA,
+									    users.Elo AS elo
+									FROM users, games
+									WHERE games.LoserID = users.user_ID
+									GROUP BY users.user_ID)
+								    ) AS t
+								    GROUP BY username
+								    ORDER BY elo desc;");
+						while($row=mysql_fetch_array($res))
+						{
+						 ?>
+						    <tr>
+						    <td style="text-align: center;"><p><?php echo $row['username']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(wins)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(loss)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(PF)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['SUM(PA)']; ?></p></td>
+						    <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td>
+						    </tr>
+						    <?php
+						}
+					?>
+				</table>
             </div>
             
             <!-- Main content ends here -->

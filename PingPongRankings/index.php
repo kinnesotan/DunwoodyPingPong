@@ -32,7 +32,6 @@ if(isset($_POST['btn-login']))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Official Dunwoody Ping Pong | Log in</title>
         <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
@@ -77,7 +76,7 @@ if(isset($_POST['btn-login']))
 	<!-- Main body -->
 		
 		<div class="main" style="position: absolute;">
-			<div id="headline"><h3>Please enter your login info</h3></div>
+			<div id="headline"><h3>Please enter your login information</h3></div>
 				<form method="post">
 					<table align="center" width="80%" border="0">
 					<tr>

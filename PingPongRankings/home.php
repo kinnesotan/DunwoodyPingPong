@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'dbconnect.php';
+
 if(!isset($_SESSION['user']))
 {
 	//header("Location: index.php");
@@ -18,6 +19,7 @@ else
 	}</style>
 	<?php
 }
+
 if(isset($_POST['btn-login']))
 {
 	$email = mysql_real_escape_string($_POST['email']);
@@ -41,7 +43,6 @@ if(isset($_POST['btn-login']))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Official Dunwoody Ping Pong</title>
         
@@ -101,7 +102,7 @@ if(isset($_POST['btn-login']))
 		
 		<div class="main" style="position: absolute;">
 			<div id="headline">
-				<h3 style="font-size: .9em; margin-top: -15px;">Welcome to the official Dunwoody Ping Pong Site</h3>
+				<h3 style="font-size: .9em;">Welcome to the official Dunwoody Ping Pong Site</h3>
 			    </div>
 			<p class="mainpara">
 			   This is the official site to keep track of ping pong scores and rankings at

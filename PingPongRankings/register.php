@@ -30,7 +30,6 @@ if(isset($_POST['btn-signup']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Dunwoody Ping Pong Registration</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" media="(min-width: 1000px)" href="main.css" />
 	<link rel="stylesheet" media="(max-width: 999px)" href="mobile/style.css" />
     <link rel="shortcut icon" href="http://www.dunwoody.edu/wp-content/themes/dunwoody/images/favicon.ico">
