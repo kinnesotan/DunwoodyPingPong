@@ -1,0 +1,243 @@
+#mobile-wrapper {
+    display: none !important;
+}
+body {
+    width: 100%;
+    margin: 0;
+    font-family: sans-serif;
+}
+#main-wrapper {
+    width: 100%;
+}
+#top-bar {
+    width: 100%;
+    height: 50px;
+    background-color: #A31929;
+}
+#main-layout {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+#header {
+    width: 100%;
+    height: auto;
+    clear: both;
+    overflow: hidden;
+}
+#center-header {
+    width: 96%;
+    height: auto;
+    margin: 0 auto;
+}
+.logo {
+    width: 15%;
+    float: left;
+    padding-top: 10px;
+}
+.logo img {
+    max-width: 100%;
+    height: auto;
+}
+#logo-text {
+    float: left;
+    padding-top: 2%;
+    font-size: 5.5vw;
+    text-transform: uppercase;
+    font-family: serif;
+    color: #A31929;
+}
+#nav {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    border: none;
+    background-color: #A31929;
+}
+#nav ul {
+    padding: 0;
+}
+#nav ul li {
+    display: inline-block;
+}
+#nav ul li a:link {
+    text-decoration: none;
+    padding: 20px;
+    color: white;
+}
+
+#nav ul li a:link {
+    text-decoration: none;
+}
+#nav ul a:visited {
+    color: white;
+}
+#nav ul li a:hover {
+    text-decoration: none;
+    background: #771929;
+
+}
+#nav a {
+    display: inline-block;
+    width: 175px;
+}
+/* MAIN    MAIN     MAIN */
+#main {
+    width: 80%;
+    margin: 0 auto;
+}
+#headline {
+    margin: 0 auto;
+    color: white;
+    background-color: #A31929;
+    width: 80%;
+    height: 35px;
+    padding: 20px 0 0 10px;
+    border-left: solid 10px black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 2.5vw;
+}
+.mainpara 
+{
+    font-family: sans-serif;
+    padding: 5px;
+    font-size: 1.2em;
+}
+#rules {
+    border: solid thin black;
+    width: 80%; 
+    margin: 5px auto 20px auto;
+}
+/* FOOTER FOOTER FOOTER */
+#footer {
+    width: 100%;
+    height: auto;
+    border-top: solid thin black;
+    border-bottom: solid thin black;
+    clear: both;
+}
+#footer-content {
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 20px;
+}
+/* LOG IN/OUT FIELDS */
+input {
+    width:200px;
+    height:20px;
+    border:solid #e1e1e1 1px;
+    border-radius:3px;
+    padding-left:10px;
+    font-family:sans-serif;
+    font-size:16px;
+    background:#f9f9f9;
+    transition-duration:0.5s;
+    box-shadow: inset 0px 0px 1px rgba(0,0,0,0.4);
+}
+.login-button {
+    background-color: #771929;
+    font-weight: bold;
+    color: white;
+    height: 25px;
+    width: 100px;
+}
+.loggedout-main {
+    float: right;
+    margin-top: 5px;
+    margin-right: 100px;
+}
+.loggedout-main a {
+    text-decoration: none;
+    color: white;
+}
+.loggedout-main a:visited {
+    color: white;
+}
+.loggedin-main {
+    float: right;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+.loggedin-main a {
+    text-decoration: none;
+    color: white;
+}
+.loggedin-main a:visited {
+    color: white;
+}
+#loggedin {
+    font-size: 1.5em;
+    color: white;
+}
+span #logout {
+    background: #771929;
+    background:-moz-linear-gradient(top, #595959 , #515151);
+    border-radius:3px;
+    border: solid thin white;
+    box-shadow: 1px 1px 1px rgba(1,0,0,0.2);
+    color:#f9f9f9;
+    font-family:sans-serif;
+    font-size:1em;
+    padding: 5px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+span #logout:active {
+    position:relative;
+    top:1px;
+}
+/* SCORE LOGGING FIELDS */
+#scoretable {
+    background-color: red;
+}
+#center {
+    width: 600px;
+    margin: 0 auto;
+}
+table tr,td {
+    padding:10px;
+}
+table td a {
+    color: #A31929;
+    text-decoration: none;
+}
+table td a:hover {
+    color: red;
+}
+table td a:visited {
+    color: #A31929;
+}
+table tr td input {
+    width:400px;
+    height:45px;
+    border:solid #e1e1e1 1px;
+    border-radius:3px;
+    padding-left:10px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:16px;
+    background:#f9f9f9;
+    transition-duration:0.5s;
+    box-shadow: inset 0px 0px 1px rgba(0,0,0,0.4);
+}
+table tr td button {
+    width:400px;
+    height:45px;
+    border:0px;
+    background: #A31929;
+    background:-moz-linear-gradient(top, #595959 , #515151);
+    border-radius:3px;
+    box-shadow: 1px 1px 1px rgba(1,0,0,0.2);
+    color:#f9f9f9;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:18px;
+    font-weight:bolder;
+    text-transform:uppercase;
+}
+table tr td button:active {
+    position:relative;
+    top:1px;
+}
