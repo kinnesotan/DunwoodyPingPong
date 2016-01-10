@@ -19,9 +19,9 @@
     $mail->IsHTML(true);
     $mail->Body    = 'Hi there ,
                         <br />
-                        THIS ACTUALLY WORKED
+                        Hey I sent this in class yo
                         <br />
-                        Only spent like four hours total on this.';
+                        Crazy man.';
   
      if($mail->Send())
      {
