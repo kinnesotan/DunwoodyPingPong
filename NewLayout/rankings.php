@@ -93,11 +93,12 @@ if(isset($_POST['btn-login']))
 				<div id="headline"><h3 style="font-size: .9em;">Unofficial Ping Pong Rankings</h3></div>
 				<table style="margin-bottom: 20px; margin-top: 20px;"  align="center" border="1">
 					<tr>
-					<th>Username</th>
-					<th>Wins</th>
-					<th>Losses</th>
-					<th>Points For</th>
-					<th>Points Against</th>
+					<th>NAME</th>
+					<th>W</th>
+					<th>L</th>
+					<th>PF</th>
+					<th>PA</th>
+					<th>RANK</th>
 					<!-- <th>Ranking</th> -->
 					</tr>
 						<?php
@@ -131,7 +132,7 @@ if(isset($_POST['btn-login']))
 										GROUP BY users.user_ID)
 									    ) AS t
 									    GROUP BY username
-									    ORDER BY wins desc;");
+									    ORDER BY elo desc;");
 							while($row=mysql_fetch_array($res))
 							{
 							 ?>
@@ -141,7 +142,7 @@ if(isset($_POST['btn-login']))
 							    <td style="text-align: center;"><p><?php echo $row['SUM(loss)']; ?></p></td>
 							    <td style="text-align: center;"><p><?php echo $row['SUM(PF)']; ?></p></td>
 							    <td style="text-align: center;"><p><?php echo $row['SUM(PA)']; ?></p></td>
-							    <!-- <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td> -->
+							    <td style="text-align: center;"><p><?php echo $row['elo']; ?></p></td>
 							    </tr>
 							    <?php
 							}
@@ -227,7 +228,7 @@ if(isset($_POST['btn-login']))
 				<th>Losses</th>
 				<th>Points For</th>
 				<th>Points Against</th>
-				<th>Ranking (beta)</th>
+				<th>Ranking</th>
 				</tr>
 					<?php
 						$res=mysql_query("SELECT  username,
@@ -260,7 +261,7 @@ if(isset($_POST['btn-login']))
 									GROUP BY users.user_ID)
 								    ) AS t
 								    GROUP BY username
-								    ORDER BY wins desc;");
+								    ORDER BY elo desc;");
 						while($row=mysql_fetch_array($res))
 						{
 						 ?>

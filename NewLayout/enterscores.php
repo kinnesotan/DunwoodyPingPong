@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'dbconnect.php';
+include 'elo.php';
 if(!isset($_SESSION['user']))
 {
 	header("Location: login.php");
@@ -60,7 +61,7 @@ if(isset($_POST['btn-post']))
 			
 			$query2 = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
 			$result2 = mysql_fetch_array($query2) or die(mysql_error());
-			$loserRating = $result1['Elo'];
+			$loserRating = $result2['Elo'];
 			
 			$rating = new Rating($winnerRating, $loserRating, 1, 0);			
 			$results = $rating->getNewRatings();
@@ -102,7 +103,7 @@ if(isset($_POST['btn-post']))
 			
 			$query2 = mysql_query("SELECT Elo FROM users WHERE user_id=".$Loser_ID);
 			$result2 = mysql_fetch_array($query2) or die(mysql_error());
-			$winnerRating = $result1['Elo'];
+			$winnerRating = $result2['Elo'];
 			
 			$rating = new Rating($winnerRating, $loserRating, 1, 0);			
 			$results = $rating->getNewRatings();
